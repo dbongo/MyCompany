@@ -4,4 +4,6 @@ package com.project.classes;
 
 public class Salary {
 
+    /* Переменная - хранит данные о зарплате человека (сотрудника). */
+    private long solary;
 }
