@@ -5,5 +5,14 @@ package com.project.classes;
 public class Position {
 
     /* Хранит названия должности. */
-    private String namePosition;
+    private String name;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
