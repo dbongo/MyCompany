@@ -7,6 +7,7 @@ public class Position {
     /* Хранит названия должности. */
     private String name;
 
+    /* Реализация. */
 
     public String getName() {
         return name;

@@ -13,6 +13,7 @@ public class Staff {
     /* Переменная - хранит возраст человека (сотрудника). */
     private byte age;
 
+    /* Реализация. */
 
     public String getName() {
         return name;

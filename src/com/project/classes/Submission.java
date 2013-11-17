@@ -5,4 +5,7 @@ package com.project.classes;
 public class Submission {
 
     /* ПисатьТут. */
+
+
+    /* Реализация. */
 }

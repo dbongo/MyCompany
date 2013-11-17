@@ -15,4 +15,6 @@ public class Salary {
     public void setSolary(long solary) {
         this.solary = solary;
     }
+
+    /* Реализация. */
 }
