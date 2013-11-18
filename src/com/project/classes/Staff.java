@@ -11,7 +11,7 @@ public class Staff {
     /* Переменная - хранит номер телефона человека (сотрудника). */
     private String phone;
     /* Переменная - хранит возраст человека (сотрудника). */
-    private byte age;
+    private int age;
 
     /* Реализация. */
 
@@ -39,11 +39,11 @@ public class Staff {
         this.phone = phone;
     }
 
-    public byte getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(byte age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }
