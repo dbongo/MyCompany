@@ -2,6 +2,7 @@ package com.project.classes;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+/** Главное меню программы. */
 public class MainMenu {
 
     /* Сканер для обработки нажатий с клавиатуры. */
@@ -26,12 +27,12 @@ public class MainMenu {
             }
             case 1: {
                 Position position = new Position();
-                position.position();
+                position.positionMenu();
                 break;
             }
             case 2: {
                 Staff staff = new Staff();
-                staff.staff();
+                staff.staffMenu();
                 break;
             }
             default: {

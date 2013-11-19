@@ -1,9 +1,9 @@
 package com.project.classes;
 import com.project.mysql.Connect;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /** Данный класс хранит данные о людях (сотрудники). */
-
 public class Staff {
 
     /* Ссылка на класс Connect. */
@@ -22,11 +22,17 @@ public class Staff {
     /* Переменная - хранит номер телефона человека (сотрудника). */
     private String phone = null;
     /* Переменная - хранит возраст человека (сотрудника). */
-    private int age;
+    private int age = 0;
+
+
+
+
+
+    String nameY = null;
 
 
     /* Реализация. */
-    public void staff () {
+    public void staffMenu() throws SQLException {
         System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники'");
         System.out.println("Вы можете выполнить следующие пункти: \n");
         System.out.println("[1] - Добавить сотрудника");
@@ -39,7 +45,7 @@ public class Staff {
         }
         catch (Exception e) {
             System.out.println("Пожалуйста, введите правельные данные!");
-            staff();
+            staffMenu();
         }
 
         switch (action) {
@@ -56,9 +62,27 @@ public class Staff {
         }
     }
 
-    private void addStaff () {
-        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить должность'");
+    /* Метод, который позволет добавить сотрудника. */
+    private void addStaff () throws SQLException {
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить сотрудника'");
         System.out.println("Для того что бы добавить дожлность необходимо ввести: \n");
+
+
+        System.out.print("Для добовления сотрудника введите название должности: ");
+        Scanner scan = new Scanner(System.in);
+        nameY = scan.nextLine();
+
+        /* Запрос на выборку данных. Если  */
+        query = "SELECT idPosition FROM companyDB.Position WHERE title = '" + nameY + "';";
+        connect.connectToDatabase(query);
+
+
+
+
+
+
+
+
 
         System.out.print("Имя сотрудника: ");
         Scanner scennerName = new Scanner(System.in);
@@ -78,9 +102,21 @@ public class Staff {
 
 
 
-        /* Запрос добовляющий новую должность в базу данных. */
-       // query = "INSERT INTO companyDB.Position (title, salary)" + " VALUES" + " ('"+ name + "'" + ", " + "'" + salary +"')";
-//        connect.connectToDatabase(query);
+
+
+        if (connect.getResultQuery() != null) {
+            int idPosition = 42;
+            //query = "INSERT INTO companyDB.Staff (name, lastName, phone, age, idPosition) VALUES ('" + name + "', " + "'" + lastName + "', " + "'" + phone + "', " + "'" + age + "', " + "'" + idPosition + "'" + ")";
+            query = "INSERT INTO companyDB.Staff (name, lastName, phone, age, idPosition) VALUES ('" + name + "', " + "'" + lastName + "', " + "'" + phone + "', " + "'" + age + "', " + "'" + connect.getResultQuery() + "'" + ")";
+
+            System.out.println("Чувак добавлен");
+
+            //connect.getResultQuery()
+            connect.connectToDatabase(query);
+        }
+        else  {
+            System.out.println("Error!!!");
+        }
 
 
     }
