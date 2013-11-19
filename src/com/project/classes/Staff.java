@@ -26,7 +26,7 @@ public class Staff {
 
 
     /* Реализация. */
-    public void Staff () {
+    public void staff () {
         System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники'");
         System.out.println("Вы можете выполнить следующие пункти: \n");
         System.out.println("[1] - Добавить сотрудника");
@@ -39,7 +39,7 @@ public class Staff {
         }
         catch (Exception e) {
             System.out.println("Пожалуйста, введите правельные данные!");
-            Staff();
+            staff();
         }
 
         switch (action) {

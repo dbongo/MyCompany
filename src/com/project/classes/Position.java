@@ -27,8 +27,15 @@ public class Position {
         System.out.println("[2] - Удалить должность");
         System.out.println("[0] - Выход с программы");
 
-        System.out.print("Введите [тег] действия: ");
-        action = scanner.nextByte();
+        try {
+            System.out.print("Введите [тег] действия: ");
+            Scanner scannerAction = new Scanner(System.in);
+            action = scannerAction.nextByte();
+        }
+        catch (Exception e) {
+            System.out.println("Пожалуйста, введите правельные данные!");
+            position();
+        }
 
         switch (action) {
             /* Выход с программы. */
@@ -37,56 +44,61 @@ public class Position {
             }
             /* Добовление новой должности. */
             case 1: {
-                System.out.println("Для того что бы добавить дожлность необходимо ввести: ");
-
-                System.out.print("Название должности: ");
-                Scanner sc = new Scanner(System.in);
-                name = sc.nextLine();
-
-                System.out.print("Зарплата должности: ");
-                salary = scanner.nextInt();
-
-                /* Запрос добовляющий новую должность в базу данных. */
-                query = "INSERT INTO companyDB.Position (title, salary)" + " VALUES" + " ('"+ name + "'" + ", " + "'" + salary +"')";
-                connect.connectToDatabase(query);
-
-                System.out.println("Вы успешно добавили должность: " + name);
+                addPosition();
                 break;
             }
             /* Удаление должности. */
             case 2: {
-                System.out.println("Для удаления должности введите её название: ");
-
-                Scanner scan = new Scanner(System.in);
-                name = scan.nextLine();
-
-                /* Запрос на выборку данных. Если  */
-                query = "SELECT idPosition FROM companyDB.Position WHERE title = '" + name + "';";
-                connect.connectToDatabase(query);
-
-                /* Проверка, если результат не равен 0 то удаляем должность. */
-                if (connect.getResultQuery() != null) {
-                    /* Запрос на удаление должности. */
-                    query = "DELETE FROM companyDB.Position WHERE idPosition = '" + connect.getResultQuery() + "';";
-                    /* Передаём запрос в метод. */
-                    connect.connectToDatabase(query);
-
-                    System.out.println("Должность успешно удалена!");
-                }
-                /* Срабатывает если запрос не выполнился. */
-                else {
-                    System.out.println("ERROR");
-                }
-                break;
-            }
-            /* Редактирование должности. */
-            case 3: {
+                deletePosition();
                 break;
             }
             default: {
-                position();
                 break;
             }
+        }
+    }
+
+    /* Добовление новой должности. */
+    private void addPosition () throws SQLException {
+        System.out.println("Для того что бы добавить дожлность необходимо ввести: ");
+
+        System.out.print("Название должности: ");
+        Scanner sc = new Scanner(System.in);
+        name = sc.nextLine();
+
+        System.out.print("Зарплата должности: ");
+        salary = scanner.nextInt();
+
+                /* Запрос добовляющий новую должность в базу данных. */
+        query = "INSERT INTO companyDB.Position (title, salary)" + " VALUES" + " ('"+ name + "'" + ", " + "'" + salary +"')";
+        connect.connectToDatabase(query);
+
+        System.out.println("Вы успешно добавили должность: " + name);
+    }
+
+    /* Удаление должности. */
+    private void deletePosition () throws SQLException {
+        System.out.println("Для удаления должности введите её название: ");
+
+        Scanner scan = new Scanner(System.in);
+        name = scan.nextLine();
+
+                /* Запрос на выборку данных. Если  */
+        query = "SELECT idPosition FROM companyDB.Position WHERE title = '" + name + "';";
+        connect.connectToDatabase(query);
+
+                /* Проверка, если результат не равен 0 то удаляем должность. */
+        if (connect.getResultQuery() != null) {
+                    /* Запрос на удаление должности. */
+            query = "DELETE FROM companyDB.Position WHERE idPosition = '" + connect.getResultQuery() + "';";
+                    /* Передаём запрос в метод. */
+            connect.connectToDatabase(query);
+
+            System.out.println("Должность успешно удалена!");
+        }
+                /* Срабатывает если запрос не выполнился. */
+        else {
+            System.out.println("ERROR");
         }
     }
 }

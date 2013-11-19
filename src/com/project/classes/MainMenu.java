@@ -31,7 +31,7 @@ public class MainMenu {
             }
             case 2: {
                 Staff staff = new Staff();
-                staff.Staff();
+                staff.staff();
                 break;
             }
             default: {
