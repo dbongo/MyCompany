@@ -22,12 +22,13 @@ public class Position {
 
     /** Меню должности. */
     public void positionMenu() throws SQLException {
-        System.out.println("Вы находитесь в: 'Меню программы' -> 'Должности' \n");
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Должности'");
         System.out.println("Вы можете выполнить следующие пункти: \n");
         System.out.println("[1] - Добавить должность");
         System.out.println("[2] - Удалить должность");
+        System.out.println("[3] - Редактировать должность");
         System.out.println("[9] - Вернуться в предыдущее меню");
-        System.out.println("[0] - Выход с программы");
+        System.out.println("[0] - Выход с программы \n");
 
         try {
             System.out.print("Введите [тег] действия: ");

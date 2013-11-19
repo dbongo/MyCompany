@@ -18,13 +18,13 @@ public class MainMenu {
 
         /* Проверка на валидность данных. */
         try {
+            action = 0;
+
             System.out.print("Введите [тег] действия: ");
             /* Сканер для обработки нажатий с клавиатуры. */
             Scanner scannerAction = new Scanner(System.in);
             action = scannerAction.nextByte();
 
-
-            // TODO: Действия
             switch (action) {
                 case 0: {
                     /* Выходим с программы. */

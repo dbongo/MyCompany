@@ -1,3 +1,5 @@
+/*
+
 package com.project.mysql;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -75,3 +77,5 @@ public class MySQL {
         }
     }
 }
+
+*/

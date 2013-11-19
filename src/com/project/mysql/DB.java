@@ -1,3 +1,5 @@
+/*
+
 package com.project.mysql;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,8 +15,6 @@ public class DB {
     String username = "root";
     String password = null;
 
-
-    /*
     public void start() throws SQLException {
         Connection connection;
         try {
@@ -93,7 +93,7 @@ public class DB {
 
 
 
-    }  */
+    }
 
 
 
@@ -131,3 +131,5 @@ public class DB {
         }
     }
 }
+
+*/

@@ -13,7 +13,7 @@ public class Connect {
     /* Перемення для результата запроса с базы данных. */
     private String resultQuery = null;
 
-    /* Геттер для resultQuery. */
+    /** Геттер для resultQuery - возвращает результат запроса. */
     public String getResultQuery() {
         return resultQuery;
     }
@@ -40,7 +40,10 @@ public class Connect {
             resultSet = stmt.executeQuery(query);
 
             while (resultSet.next()) {
-                resultQuery = resultSet.getString(1);
+
+            resultQuery = resultSet.getString(1);
+                  //resultQuery = resultSet.getString(y = 1) + "  \t   " + resultSet.getString(y++) + "  \t   " + resultSet.getString(3);
+
                 System.out.println(resultQuery);
             }
             //----------------------------
