@@ -1,15 +1,9 @@
 package com.project.mysql;
 import java.sql.*;
 
-public class Connect {
 
-    /*
-    /* Хранит путь к драйверу. */
-    //private final String driverName = "com.mysql.jdbc.Driver";
-    /* Хранит серверное название. */
-    //private final String serverName = "localhost";
-    /* Хранит название базы данных. */
-    //private final String databaseName = "companyDB";
+/* Класс отвечающий за подключение к базе данных и выполняющий SQL запросы.. */
+public class Connect {
 
     /* Хранит полный url. */
     private final String url = "jdbc:mysql://localhost/companyDB";
@@ -17,6 +11,14 @@ public class Connect {
     private final String userName = "root";
     /* Хранит пароль от базы данных. */
     private final String password = null;
+
+    private String dbtime = null;
+
+
+
+    public String getDbtime() {
+        return dbtime;
+    }
 
     /* Метод принимающий SQL запрос. */
     public void createDbUserTable (String query) throws SQLException {
@@ -36,9 +38,8 @@ public class Connect {
 
             //-------------------------
             Statement stmt = connection.createStatement();
-
             resultSet = stmt.executeQuery(query);
-            String dbtime;
+
             while (resultSet.next()) {
                 dbtime = resultSet.getString(1);
                 System.out.println(dbtime);

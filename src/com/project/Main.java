@@ -8,6 +8,9 @@ public class Main {
 
         MainMenu mainMenu = new MainMenu();
         mainMenu.menu();
+
+        //System.out.println("DELETE FROM companyDB.Position WHERE idPosition = '" + "22" + "';");
+        //System.out.println("SELECT idPosition FROM companyDB.Position WHERE title = '" + "Sasha" + "';");
     }
 }
 
