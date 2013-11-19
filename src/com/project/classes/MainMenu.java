@@ -46,6 +46,7 @@ public class MainMenu {
             }
         }
         catch (InputMismatchException e) {
+            System.err.println("Error - #" + e);
             System.out.println("Возникла ошибка, пожалуйста, введите правельные данные! \n");
             menu();
         }
