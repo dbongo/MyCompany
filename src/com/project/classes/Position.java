@@ -83,13 +83,13 @@ public class Position {
         }
     }
 
-    /* Удаление должности. */
+    /** Удаление должности. */
     private void deletePosition () throws SQLException {
         try {
-            System.out.println("Для удаления должности введите её название: ");
+            System.out.print("Для удаления должности введите её название: ");
 
-            Scanner scan = new Scanner(System.in);
-            name = scan.nextLine();
+            Scanner scannnerName = new Scanner(System.in);
+            name = scannnerName.nextLine();
 
             /* Запрос на выборку данных. Если  */
             query = "SELECT idPosition FROM companyDB.Position WHERE title = '" + name + "';";

@@ -13,9 +13,6 @@ public class Staff {
     private byte action = 0;
     /* Переменная содержащая SQL запрос. */
     private String query = null;
-
-
-
     /* Переменная - хранит имя человека (сотрудника). */
     private String name = null;
     /* Переменная - хранит фамилию человека (сотрудника). */
@@ -24,12 +21,11 @@ public class Staff {
     private String phone = null;
     /* Переменная - хранит возраст человека (сотрудника). */
     private int age = 0;
-
     /* Переменная - для хранения названия должности. */
     private String namePosition = null;
 
 
-    /* Реализация. */
+    /* Меню сотрудников. */
     public void staffMenu() throws SQLException {
         System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники'");
         System.out.println("Вы можете выполнить следующие пункти: \n");
@@ -54,6 +50,10 @@ public class Staff {
                 addStaff();
                 break;
             }
+            case 2: {
+                deleteStaff();
+                break;
+            }
             default: {
                 System.out.println("Действия с тегом [" + action + "] нет! Попробуйте ещё раз.");
                 staffMenu();
@@ -64,9 +64,9 @@ public class Staff {
 
     /* Метод, который позволет добавить сотрудника. */
     private void addStaff () throws SQLException {
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить сотрудника'");
         try {
-            System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить сотрудника'");
-            System.out.println("Для того что бы добавить дожлность необходимо ввести: \n");
+            System.out.println("Для того что бы добавить сотрудника необходимо ввести: \n");
 
 
             System.out.print("Для добовления сотрудника введите название должности: ");
@@ -107,8 +107,43 @@ public class Staff {
             }
         }
         catch (Exception e) {
-            System.out.println("Error - " + e);
+            System.out.println("Error - # " + e);
             addStaff();
         }
     }
-}
+
+    /* Метож, который позволяет удалить сотрудника. */
+    private void deleteStaff () {
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Удалить сотрудника'");
+
+        try {
+            System.out.println("Для того что бы удалить сотрудника необходимо ввести: \n");
+            System.out.print("Для удаления сотрудника необходимо ввести его фамилию: ");
+
+            Scanner scannerNamePosition = new Scanner(System.in);
+            lastName = scannerNamePosition.nextLine();
+
+            /* Запрос на выборку данных. Если  */
+            query = "SELECT idStaff FROM companyDB.Staff WHERE lastName = '" + lastName + "';";
+            connect.connectToDatabase(query);
+
+            /* Проверка, если результат не равен 0 то удаляем должность. */
+            if (connect.getResultQuery() != null) {
+            /* Запрос на удаление должности. */
+                query = "DELETE FROM companyDB.Staff WHERE idStaff = '" + connect.getResultQuery() + "';";
+            /* Передаём запрос в метод. */
+                connect.connectToDatabase(query);
+
+                System.out.println("Должность успешно удалена!");
+            }
+            /* Срабатывает если запрос не выполнился. */
+            else {
+                System.out.println("ERROR");
+            }
+
+        }   //try
+        catch (Exception e) {
+            System.err.println("Error - # " + e);
+        }   //catcha
+    } //deleteStaff
+} //class

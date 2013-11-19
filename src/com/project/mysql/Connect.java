@@ -1,7 +1,6 @@
 package com.project.mysql;
 import java.sql.*;
 
-
 /* Класс отвечающий за подключение к базе данных и выполняющий SQL запросы.. */
 public class Connect {
 
@@ -25,6 +24,7 @@ public class Connect {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
+        Statement stmt = null;
 
         /* Подключение к Базе данных. */
         try {
@@ -36,7 +36,7 @@ public class Connect {
             statement.execute(query);
 
             //-------------------------
-            Statement stmt = connection.createStatement();
+            stmt = connection.createStatement();
             resultSet = stmt.executeQuery(query);
 
             while (resultSet.next()) {
@@ -45,6 +45,7 @@ public class Connect {
             }
             //----------------------------
 
+            System.out.println(resultQuery);
             System.out.println("Запрос выполнился успешно!");
         }
         catch (SQLException e) {
