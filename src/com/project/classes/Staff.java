@@ -1,6 +1,7 @@
 package com.project.classes;
 import com.project.mysql.Connect;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /** Данный класс хранит данные о людях (сотрудники). */
@@ -24,11 +25,8 @@ public class Staff {
     /* Переменная - хранит возраст человека (сотрудника). */
     private int age = 0;
 
-
-
-
-
-    String nameY = null;
+    /* Переменная - для хранения названия должности. */
+    private String namePosition = null;
 
 
     /* Реализация. */
@@ -43,7 +41,7 @@ public class Staff {
             Scanner scannerAction = new Scanner(System.in);
             action = scannerAction.nextByte();
         }
-        catch (Exception e) {
+        catch (InputMismatchException e) {
             System.out.println("Пожалуйста, введите правельные данные!");
             staffMenu();
         }
@@ -57,6 +55,8 @@ public class Staff {
                 break;
             }
             default: {
+                System.out.println("Действия с тегом [" + action + "] нет! Попробуйте ещё раз.");
+                staffMenu();
                 break;
             }
         }
@@ -64,60 +64,51 @@ public class Staff {
 
     /* Метод, который позволет добавить сотрудника. */
     private void addStaff () throws SQLException {
-        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить сотрудника'");
-        System.out.println("Для того что бы добавить дожлность необходимо ввести: \n");
+        try {
+            System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить сотрудника'");
+            System.out.println("Для того что бы добавить дожлность необходимо ввести: \n");
 
 
-        System.out.print("Для добовления сотрудника введите название должности: ");
-        Scanner scan = new Scanner(System.in);
-        nameY = scan.nextLine();
+            System.out.print("Для добовления сотрудника введите название должности: ");
+            Scanner scan = new Scanner(System.in);
+            namePosition = scan.nextLine();
 
-        /* Запрос на выборку данных. Если  */
-        query = "SELECT idPosition FROM companyDB.Position WHERE title = '" + nameY + "';";
-        connect.connectToDatabase(query);
-
-
-
-
-
-
-
-
-
-        System.out.print("Имя сотрудника: ");
-        Scanner scennerName = new Scanner(System.in);
-        name = scennerName.nextLine();
-
-        System.out.print("Фамилия сорудника: ");
-        Scanner scennerLastName = new Scanner(System.in);
-        lastName = scennerLastName.nextLine();
-
-        System.out.print("Возраст сорудника: ");
-        Scanner scennerAge = new Scanner(System.in);
-        age = scennerAge.nextInt();
-
-        System.out.print("Телефон сорудника: ");
-        Scanner scennerPhone = new Scanner(System.in);
-        phone = scennerPhone.nextLine();
-
-
-
-
-
-        if (connect.getResultQuery() != null) {
-            int idPosition = 42;
-            //query = "INSERT INTO companyDB.Staff (name, lastName, phone, age, idPosition) VALUES ('" + name + "', " + "'" + lastName + "', " + "'" + phone + "', " + "'" + age + "', " + "'" + idPosition + "'" + ")";
-            query = "INSERT INTO companyDB.Staff (name, lastName, phone, age, idPosition) VALUES ('" + name + "', " + "'" + lastName + "', " + "'" + phone + "', " + "'" + age + "', " + "'" + connect.getResultQuery() + "'" + ")";
-
-            System.out.println("Чувак добавлен");
-
-            //connect.getResultQuery()
+            /* Запрос на выборку данных. Если  */
+            query = "SELECT idPosition FROM companyDB.Position WHERE title = '" + namePosition + "';";
             connect.connectToDatabase(query);
-        }
-        else  {
-            System.out.println("Error!!!");
-        }
 
 
+            if (connect.getResultQuery() != null) {
+                System.out.print("Имя сотрудника: ");
+                Scanner scennerName = new Scanner(System.in);
+                name = scennerName.nextLine();
+
+                System.out.print("Фамилия сорудника: ");
+                Scanner scennerLastName = new Scanner(System.in);
+                lastName = scennerLastName.nextLine();
+
+                System.out.print("Возраст сорудника: ");
+                Scanner scennerAge = new Scanner(System.in);
+                age = scennerAge.nextInt();
+
+                System.out.print("Телефон сорудника: ");
+                Scanner scennerPhone = new Scanner(System.in);
+                phone = scennerPhone.nextLine();
+
+                /* SQL запрос на добовление сотрудника. */
+                query = "INSERT INTO companyDB.Staff (name, lastName, phone, age, idPosition) VALUES ('" + name + "', " + "'" + lastName + "', " + "'" + phone + "', " + "'" + age + "', " + "'" + connect.getResultQuery() + "'" + ")";
+                /* Передаём запрос в метод. */
+                connect.connectToDatabase(query);
+                System.out.println("Чувак добавлен");
+            }
+            else  {
+                System.out.println("К сожелению должности " + connect.getResultQuery() + " нет! Введите существующею должность");
+                addStaff();
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Error - " + e);
+            addStaff();
+        }
     }
 }

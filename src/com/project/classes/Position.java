@@ -1,6 +1,7 @@
 package com.project.classes;
 import com.project.mysql.Connect;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /** Данный клас хранит данные о должностей должностях. */
@@ -20,6 +21,7 @@ public class Position {
     /* Переменная содержащая SQL запрос. */
     private String query = null;
 
+
     /* Меню должности. */
     public void positionMenu() throws SQLException {
         System.out.println("Вы можете выполнить следующие пункти: \n");
@@ -32,7 +34,7 @@ public class Position {
             Scanner scannerAction = new Scanner(System.in);
             action = scannerAction.nextByte();
         }
-        catch (Exception e) {
+        catch (InputMismatchException e) {
             System.out.println("Пожалуйста, введите правельные данные!");
             positionMenu();
         }
@@ -50,6 +52,8 @@ public class Position {
                 break;
             }
             default: {
+                System.out.println("Действия с тегом [" + action + "] нет! Попробуйте ещё раз.");
+                positionMenu();
                 break;
             }
         }
