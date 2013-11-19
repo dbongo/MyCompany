@@ -105,7 +105,7 @@ public class DB {
         Connection dbConnection = null;
         Statement statement = null;
 
-        String createTableSQL = "INSERT INTO companydb.Position (title, salary) VALUES ('pizda', '123');";
+        String createTableSQL = "INSERT INTO companydb.Position (title, salary) VALUES ('sdfdsf', '123');";
 
         try {
             //dbConnection = getDBConnection();

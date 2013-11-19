@@ -44,8 +44,13 @@ public class Position {
                 System.out.print("Зарплата должности: ");
                 salary = scanner.nextInt();
 
-                query = "INSERT INTO companyDB.Position (title, salary)" + " VALUES" + " ('"+ name + "'" + ", " + "'" + salary +"')";
+                //query = "INSERT INTO companyDB.Position (title, salary)" + " VALUES" + " ('"+ name + "'" + ", " + "'" + salary +"')";
+                query = "SELECT title FROM companyDB.Position";
                 connect.createDbUserTable(query);
+                break;
+            }
+            case 2: {
+                //
                 break;
             }
             default: {

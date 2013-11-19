@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-    /* Сканер для обработки начатий с клавиатуры. */
+    /* Сканер для обработки нажатий с клавиатуры. */
     private Scanner scanner = new Scanner(System.in);
     /* Переменная для присвоения значений с клавиатуры. */
     private byte action = 0;
@@ -16,12 +16,12 @@ public class MainMenu {
         System.out.println("[2] - Добавить/Удалить сотрудника");
         System.out.println("[0] - Выход");
 
-
         System.out.print("Введите [тег] действия: ");
         action = scanner.nextByte();
 
         switch (action) {
             case 0: {
+                System.out.println("До новых встреч!");
                 break;
             }
             case 1: {
@@ -34,6 +34,7 @@ public class MainMenu {
                 break;
             }
             default: {
+                action = 0;
                 menu();
                 break;
             }
