@@ -1,13 +1,18 @@
 package com.project;
-import com.project.mysql.Connect;
+import com.project.classes.Position;
 import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
 
-        Connect connect = new Connect();
-        connect.LocalhostDBConnection();
+        Position position = new Position();
+        try {
+            position.statrPosition();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -7,7 +7,15 @@ import java.sql.Statement;
 
 public class DB {
 
-    public static void start() throws SQLException {
+    String serverName = "localhost";
+    String mydatabase = "companydb";
+    String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
+    String username = "root";
+    String password = null;
+
+
+    /*
+    public void start() throws SQLException {
         Connection connection;
         try {
             // Название драйвера
@@ -16,24 +24,17 @@ public class DB {
             Class.forName(driverName);
 
             // Create a connection to the database
-            String serverName = "localhost";
-            String mydatabase = "myDb";
-            String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
-            String username = "root";
-            String password = null;
 
-            //           jdbc:mysql://localhost/myDb
+
+
 
             connection = DriverManager.getConnection(url, username, password);
             System.out.println("is connect to DB" + connection);
 
             String query;// = "SELECT * FROM tableses\t";
-            query = "CREATE TABLE DubStep("
-                    + "USER_ID INT(5) NOT NULL, "
-                    + "USERNAME VARCHAR(20) NOT NULL, "
-                    + "CREATED_BY VARCHAR(20) NOT NULL, "
-                    + "CREATED_DATE DATE NOT NULL, " + "PRIMARY KEY (USER_ID) "
-                    + ")";
+            //query = "INSERT INTO companyDB.Position(title,salary) VALUES('pizda','213')";
+
+            query = "SELECT * FROM Position";
 
             Statement stmt = connection.createStatement();
 
@@ -52,6 +53,8 @@ public class DB {
             e.printStackTrace();
         }
 
+        createDbUserTable();
+
 
             // Could not find the database driver
         //} catch (SQLException e) {
@@ -66,6 +69,9 @@ public class DB {
            // e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         //}
     }
+
+    */
+
 
     /*
     private static Connection getDBConnection () {
@@ -84,22 +90,27 @@ public class DB {
             System.err.println(e.getMessage());
         }
         return dbConnection;
-    }
 
-    public static void createDbUserTable() throws SQLException {
+
+
+    }  */
+
+
+
+
+
+
+    public void createDbUserTable() throws SQLException {
         System.out.println("sakfjkdfjkdjsfjdfbjshsdf");
         Connection dbConnection = null;
         Statement statement = null;
 
-        String createTableSQL = "CREATE TABLE DBUSEsR("
-                + "USER_ID INT(5) NOT NULL, "
-                + "USERNAME VARCHAR(20) NOT NULL, "
-                + "CREATED_BY VARCHAR(20) NOT NULL, "
-                + "CREATED_DATE DATE NOT NULL, " + "PRIMARY KEY (USER_ID) "
-                + ")";
+        String createTableSQL = "INSERT INTO companydb.Position (title, salary) VALUES ('pizda', '123');";
 
         try {
-            dbConnection = getDBConnection();
+            //dbConnection = getDBConnection();
+            dbConnection = DriverManager.getConnection(url, username, password);
+
             statement = dbConnection.createStatement();
 
             // выполнить SQL запрос
@@ -118,5 +129,5 @@ public class DB {
                 dbConnection.close();
             }
         }
-    }*/
+    }
 }
