@@ -9,6 +9,11 @@ public class Staff {
 
     /* Ссылка на класс Connect. */
     private Connect connect = new Connect();
+
+    private MainMenu mainMenu = new MainMenu();
+
+
+
     /* Так называемый "тег". */
     private byte action = 0;
     /* Переменная содержащая SQL запрос. */
@@ -31,6 +36,7 @@ public class Staff {
         System.out.println("Вы можете выполнить следующие пункти: \n");
         System.out.println("[1] - Добавить сотрудника");
         System.out.println("[2] - Удалить сотрудника");
+        System.out.println("[9] - Вернуться в предыдущее меню");
         System.out.println("[0] - Выход с программы");
 
         try {
@@ -54,6 +60,10 @@ public class Staff {
                 deleteStaff();
                 break;
             }
+            case 9: {
+                mainMenu.menu();
+                break;
+            }
             default: {
                 System.out.println("Действия с тегом [" + action + "] нет! Попробуйте ещё раз.");
                 staffMenu();
@@ -64,20 +74,19 @@ public class Staff {
 
     /* Метод, который позволет добавить сотрудника. */
     private void addStaff () throws SQLException {
-        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить сотрудника'");
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить сотрудника' \n");
         try {
             System.out.println("Для того что бы добавить сотрудника необходимо ввести: \n");
-
 
             System.out.print("Для добовления сотрудника введите название должности: ");
             Scanner scan = new Scanner(System.in);
             namePosition = scan.nextLine();
 
-            /* Запрос на выборку данных. Если  */
+            /* Запрос на выборку данных. */
             query = "SELECT idPosition FROM companyDB.Position WHERE title = '" + namePosition + "';";
             connect.connectToDatabase(query);
 
-
+            /* Проверка - проверяте, есть ли должность. */
             if (connect.getResultQuery() != null) {
                 System.out.print("Имя сотрудника: ");
                 Scanner scennerName = new Scanner(System.in);
@@ -101,6 +110,7 @@ public class Staff {
                 connect.connectToDatabase(query);
                 System.out.println("Чувак добавлен");
             }
+            /* Срабатывает если должности которую ввел пользователь нет. */
             else  {
                 System.out.println("К сожелению должности " + connect.getResultQuery() + " нет! Введите существующею должность");
                 addStaff();
@@ -114,8 +124,7 @@ public class Staff {
 
     /* Метож, который позволяет удалить сотрудника. */
     private void deleteStaff () {
-        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Удалить сотрудника'");
-
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Удалить сотрудника' \n");
         try {
             System.out.println("Для того что бы удалить сотрудника необходимо ввести: \n");
             System.out.print("Для удаления сотрудника необходимо ввести его фамилию: ");
@@ -127,9 +136,9 @@ public class Staff {
             query = "SELECT idStaff FROM companyDB.Staff WHERE lastName = '" + lastName + "';";
             connect.connectToDatabase(query);
 
-            /* Проверка, если результат не равен 0 то удаляем должность. */
+            /* Проверка, если результат не равен 0 то удаляем сотрудника. */
             if (connect.getResultQuery() != null) {
-            /* Запрос на удаление должности. */
+            /* Запрос на удаление сотрудника. */
                 query = "DELETE FROM companyDB.Staff WHERE idStaff = '" + connect.getResultQuery() + "';";
             /* Передаём запрос в метод. */
                 connect.connectToDatabase(query);
@@ -138,12 +147,12 @@ public class Staff {
             }
             /* Срабатывает если запрос не выполнился. */
             else {
+                deleteStaff();
                 System.out.println("ERROR");
             }
-
-        }   //try
+        }
         catch (Exception e) {
             System.err.println("Error - # " + e);
-        }   //catcha
-    } //deleteStaff
-} //class
+        }
+    }
+}

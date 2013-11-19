@@ -9,8 +9,9 @@ public class Position {
 
     /* Ссылка на класс Connect. */
     private Connect connect = new Connect();
-    /* Сканер для ввода информации с клавиатуры. */
-    private Scanner scanner = new Scanner(System.in);
+    /* Ссылка на класс MainMenu. */
+    private MainMenu mainMenu = new MainMenu();
+
 
     /* Название должности. */
     private String name = null;
@@ -24,9 +25,11 @@ public class Position {
 
     /* Меню должности. */
     public void positionMenu() throws SQLException {
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Должности' \n");
         System.out.println("Вы можете выполнить следующие пункти: \n");
         System.out.println("[1] - Добавить должность");
         System.out.println("[2] - Удалить должность");
+        System.out.println("[9] - Вернуться в предыдущее меню");
         System.out.println("[0] - Выход с программы");
 
         try {
@@ -51,6 +54,10 @@ public class Position {
                 deletePosition();
                 break;
             }
+            case 9: {
+                mainMenu.menu();
+                break;
+            }
             default: {
                 System.out.println("Действия с тегом [" + action + "] нет! Попробуйте ещё раз.");
                 positionMenu();
@@ -61,21 +68,25 @@ public class Position {
 
     /* Добовление новой должности. */
     private void addPosition () throws SQLException {
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить сотрудника' \n");
         try {
             System.out.println("Для того что бы добавить дожлность необходимо ввести: ");
 
             System.out.print("Название должности: ");
-            Scanner sc = new Scanner(System.in);
-            name = sc.nextLine();
+            Scanner scannerName = new Scanner(System.in);
+            name = scannerName.nextLine();
 
             System.out.print("Зарплата должности: ");
-            salary = scanner.nextInt();
+            /* Сканер для ввода информации с клавиатуры. */
+            Scanner scannerSalary = new Scanner(System.in);
+            salary = scannerSalary.nextInt();
 
             /* Запрос добовляющий новую должность в базу данных. */
             query = "INSERT INTO companyDB.Position (title, salary)" + " VALUES" + " ('"+ name + "'" + ", " + "'" + salary +"')";
             connect.connectToDatabase(query);
 
             System.out.println("Вы успешно добавили должность: " + name);
+            positionMenu();
         }
         catch (Exception e) {
             System.err.println("Error - # " + e);
@@ -85,6 +96,7 @@ public class Position {
 
     /** Удаление должности. */
     private void deletePosition () throws SQLException {
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Удалить сотрудника' \n");
         try {
             System.out.print("Для удаления должности введите её название: ");
 
@@ -103,6 +115,7 @@ public class Position {
                 connect.connectToDatabase(query);
 
                 System.out.println("Должность успешно удалена!");
+                positionMenu();
             }
             /* Срабатывает если запрос не выполнился. */
             else {
@@ -117,5 +130,6 @@ public class Position {
 
     /* Редактирование должности. */
     private void editPosition () {
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Редактировать сотрудников' \n");
     }
 }
