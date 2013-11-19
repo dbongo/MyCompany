@@ -1,7 +1,7 @@
 package com.project.mysql;
 import java.sql.*;
 
-/* Класс отвечающий за подключение к базе данных и выполняющий SQL запросы.. */
+/** Класс отвечающий за подключение к базе данных и выполняющий SQL запросы.. */
 public class Connect {
 
     /* Хранит полный url. */
@@ -18,7 +18,7 @@ public class Connect {
         return resultQuery;
     }
 
-    /* Метод принимающий SQL запрос. */
+    /** Метод принимающий SQL запрос. */
     public void connectToDatabase(String query) throws SQLException {
         /* Три главных переменных для роботы с базой данных. */
         Connection connection = null;
@@ -54,7 +54,7 @@ public class Connect {
         }
         /* Выполниться в любом случае. */
         finally {
-            //try {
+            try {
                 if (statement != null) {
                     statement.close();
                 }
@@ -65,9 +65,9 @@ public class Connect {
                     resultSet.close();
                 }
             }
-            //catch (Exception ex) {
-              //  ex.printStackTrace();
-            //}
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
-//}
+}

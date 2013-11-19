@@ -11,8 +11,6 @@ public class Position {
     private Connect connect = new Connect();
     /* Ссылка на класс MainMenu. */
     private MainMenu mainMenu = new MainMenu();
-
-
     /* Название должности. */
     private String name = null;
     /* Данные о зарплате. */
@@ -22,8 +20,7 @@ public class Position {
     /* Переменная содержащая SQL запрос. */
     private String query = null;
 
-
-    /* Меню должности. */
+    /** Меню должности. */
     public void positionMenu() throws SQLException {
         System.out.println("Вы находитесь в: 'Меню программы' -> 'Должности' \n");
         System.out.println("Вы можете выполнить следующие пункти: \n");
@@ -66,7 +63,7 @@ public class Position {
         }
     }
 
-    /* Добовление новой должности. */
+    /** Добавление новой должности. */
     private void addPosition () throws SQLException {
         System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить сотрудника' \n");
         try {
@@ -128,7 +125,7 @@ public class Position {
         }
     }
 
-    /* Редактирование должности. */
+    /** Редактирование должности. */
     private void editPosition () {
         System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Редактировать сотрудников' \n");
     }

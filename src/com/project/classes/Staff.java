@@ -9,11 +9,8 @@ public class Staff {
 
     /* Ссылка на класс Connect. */
     private Connect connect = new Connect();
-
+    /* Ссылка на класс MainMenu. */
     private MainMenu mainMenu = new MainMenu();
-
-
-
     /* Так называемый "тег". */
     private byte action = 0;
     /* Переменная содержащая SQL запрос. */
@@ -30,7 +27,7 @@ public class Staff {
     private String namePosition = null;
 
 
-    /* Меню сотрудников. */
+    /** Меню сотрудников. */
     public void staffMenu() throws SQLException {
         System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники'");
         System.out.println("Вы можете выполнить следующие пункти: \n");
@@ -72,7 +69,7 @@ public class Staff {
         }
     }
 
-    /* Метод, который позволет добавить сотрудника. */
+    /** Метод, который позволет добавить сотрудника. */
     private void addStaff () throws SQLException {
         System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить сотрудника' \n");
         try {
@@ -109,20 +106,24 @@ public class Staff {
                 /* Передаём запрос в метод. */
                 connect.connectToDatabase(query);
                 System.out.println("Чувак добавлен");
+                /* Возвращаем пользователя к меню сотрудники. */
+                staffMenu();
             }
             /* Срабатывает если должности которую ввел пользователь нет. */
             else  {
                 System.out.println("К сожелению должности " + connect.getResultQuery() + " нет! Введите существующею должность");
+                /* Возвращаем пользователя к добовлению сотрудников. */
                 addStaff();
             }
         }
         catch (Exception e) {
             System.out.println("Error - # " + e);
+            /* Возвращаем пользователя к добовлению сотрудников. */
             addStaff();
         }
     }
 
-    /* Метож, который позволяет удалить сотрудника. */
+    /** Метож, который позволяет удалить сотрудника. */
     private void deleteStaff () {
         System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Удалить сотрудника' \n");
         try {
@@ -138,12 +139,14 @@ public class Staff {
 
             /* Проверка, если результат не равен 0 то удаляем сотрудника. */
             if (connect.getResultQuery() != null) {
-            /* Запрос на удаление сотрудника. */
+                /* Запрос на удаление сотрудника. */
                 query = "DELETE FROM companyDB.Staff WHERE idStaff = '" + connect.getResultQuery() + "';";
-            /* Передаём запрос в метод. */
+                /* Передаём запрос в метод. */
                 connect.connectToDatabase(query);
 
                 System.out.println("Должность успешно удалена!");
+                /* Возвращаем пользователя к меню сотрудники. */
+                staffMenu();
             }
             /* Срабатывает если запрос не выполнился. */
             else {
@@ -154,5 +157,10 @@ public class Staff {
         catch (Exception e) {
             System.err.println("Error - # " + e);
         }
+    }
+
+    /** Метож, который позволяет редактировать данные сотрудников. */
+    private void editStaff () {
+
     }
 }
