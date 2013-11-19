@@ -1,18 +1,13 @@
 package com.project;
-import com.project.classes.Position;
+import com.project.classes.MainMenu;
 import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main (String[] args) throws SQLException {
 
-        Position position = new Position();
-        try {
-            position.statrPosition();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.menu();
     }
 }
 

@@ -18,7 +18,6 @@ public class Connect {
 
 
     public void createDbUserTable (String query) throws SQLException {
-        System.out.println("sakfjkdfjkdjsfjdfbjshsdf");
         Connection dbConnection = null;
         Statement statement = null;
 

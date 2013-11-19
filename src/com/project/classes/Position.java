@@ -3,44 +3,48 @@ import com.project.mysql.Connect;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-/* Данный клас хранит данные о должностей сотрудников. */
+/** Данный клас хранит данные о должностей сотрудников. */
 
 public class Position {
-
+    /* Ссылка на класс Connect. */
+    private Connect connect = new Connect();
+    /* Сканер для ввода информации с клавиатуры. */
     private Scanner scanner = new Scanner(System.in);
 
-    /* Названия должности. */
-    private String name;
+    /* Название должности. */
+    private String name = null;
     /* Данные о зарплате. */
-    private int salary;
-
-
+    private int salary = 2000;
     /* Так называемый "тег". */
-    byte action = 0;
+    private byte action = 0;
     /* Переменная содержащая SQL запрос. */
-    String query = "";
+    private String query = null;
 
 
-    public void statrPosition () throws SQLException {
+    public void position () throws SQLException {
         System.out.println("Вы можете выполнить следующие пункти: \n");
         System.out.println("[1] - Добавить должность");
-
+        System.out.println("[2] - Удалить должность");
         System.out.println("[0] - Выход с программы");
 
-        //action = scanner.nextByte();
-
-        action = 1;
-        String tittle = "FUCK YOU";
-        int salar = 3000;
+        System.out.print("Введите [тег] действия: ");
+        action = scanner.nextByte();
 
         switch (action) {
             case 0: {
                 break;
             }
             case 1: {
-                query = "INSERT INTO companyDB.Position (title, salary)" + " VALUES" + " ('"+ tittle + "'" + ", " + "'" + salar +"')";
+                System.out.println("Для того что бы добавить дожлность необходимо ввести:");
 
-                Connect connect = new Connect();
+                System.out.print("Название должности: ");
+                Scanner sc = new Scanner(System.in);
+                name = sc.nextLine();
+
+                System.out.print("Зарплата должности: ");
+                salary = scanner.nextInt();
+
+                query = "INSERT INTO companyDB.Position (title, salary)" + " VALUES" + " ('"+ name + "'" + ", " + "'" + salary +"')";
                 connect.createDbUserTable(query);
                 break;
             }
