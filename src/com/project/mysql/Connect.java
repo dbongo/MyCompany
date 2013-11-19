@@ -11,17 +11,16 @@ public class Connect {
     private final String userName = "root";
     /* Хранит пароль от базы данных. */
     private final String password = null;
+    /* Перемення для результата запроса с базы данных. */
+    private String resultQuery = null;
 
-    private String dbtime = null;
-
-
-
-    public String getDbtime() {
-        return dbtime;
+    /* Геттер для resultQuery. */
+    public String getResultQuery() {
+        return resultQuery;
     }
 
     /* Метод принимающий SQL запрос. */
-    public void createDbUserTable (String query) throws SQLException {
+    public void connectToDatabase(String query) throws SQLException {
         /* Три главных переменных для роботы с базой данных. */
         Connection connection = null;
         Statement statement = null;
@@ -41,8 +40,8 @@ public class Connect {
             resultSet = stmt.executeQuery(query);
 
             while (resultSet.next()) {
-                dbtime = resultSet.getString(1);
-                System.out.println(dbtime);
+                resultQuery = resultSet.getString(1);
+                System.out.println(resultQuery);
             }
             //----------------------------
 
@@ -54,7 +53,7 @@ public class Connect {
         }
         /* Выполниться в любом случае. */
         finally {
-            try {
+            //try {
                 if (statement != null) {
                     statement.close();
                 }
@@ -65,9 +64,9 @@ public class Connect {
                     resultSet.close();
                 }
             }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            //catch (Exception ex) {
+              //  ex.printStackTrace();
+            //}
         }
     }
-}
+//}

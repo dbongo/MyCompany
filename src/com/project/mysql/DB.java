@@ -53,7 +53,7 @@ public class DB {
             e.printStackTrace();
         }
 
-        createDbUserTable();
+        connectToDatabase();
 
 
             // Could not find the database driver
@@ -63,7 +63,7 @@ public class DB {
         //}
 
         //try {
-            //createDbUserTable();
+            //connectToDatabase();
         //}
         //catch (SQLException e) {
            // e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

@@ -1,49 +1,87 @@
 package com.project.classes;
+import com.project.mysql.Connect;
+import java.util.Scanner;
 
-/* Данный класс хранит данные о людях (сотрудники). */
+/** Данный класс хранит данные о людях (сотрудники). */
 
 public class Staff {
 
+    /* Ссылка на класс Connect. */
+    private Connect connect = new Connect();
+    /* Так называемый "тег". */
+    private byte action = 0;
+    /* Переменная содержащая SQL запрос. */
+    private String query = null;
+
+
+
     /* Переменная - хранит имя человека (сотрудника). */
-    private String name;
+    private String name = null;
     /* Переменная - хранит фамилию человека (сотрудника). */
-    private String lastName;
+    private String lastName = null;
     /* Переменная - хранит номер телефона человека (сотрудника). */
-    private String phone;
+    private String phone = null;
     /* Переменная - хранит возраст человека (сотрудника). */
     private int age;
 
+
     /* Реализация. */
+    public void Staff () {
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники'");
+        System.out.println("Вы можете выполнить следующие пункти: \n");
+        System.out.println("[1] - Добавить сотрудника");
+        System.out.println("[2] - Удалить сотрудника");
+        System.out.println("[0] - Выход с программы");
 
-    public String getName() {
-        return name;
+        try {
+            Scanner scannerAction = new Scanner(System.in);
+            action = scannerAction.nextByte();
+        }
+        catch (Exception e) {
+            System.out.println("Пожалуйста, введите правельные данные!");
+            Staff();
+        }
+
+        switch (action) {
+            case 0: {
+                break;
+            }
+            case 1: {
+                addStaff();
+                break;
+            }
+            default: {
+                break;
+            }
+        }
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private void addStaff () {
+        System.out.println("Вы находитесь в: 'Меню программы' -> 'Сотрудники' -> 'Добавить должность'");
+        System.out.println("Для того что бы добавить дожлность необходимо ввести: \n");
 
-    public String getLastName() {
-        return lastName;
-    }
+        System.out.print("Имя сотрудника: ");
+        Scanner scennerName = new Scanner(System.in);
+        name = scennerName.nextLine();
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+        System.out.print("Фамилия сорудника: ");
+        Scanner scennerLastName = new Scanner(System.in);
+        lastName = scennerLastName.nextLine();
 
-    public String getPhone() {
-        return phone;
-    }
+        System.out.print("Возраст сорудника: ");
+        Scanner scennerAge = new Scanner(System.in);
+        age = scennerAge.nextInt();
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+        System.out.print("Телефон сорудника: ");
+        Scanner scennerPhone = new Scanner(System.in);
+        phone = scennerPhone.nextLine();
 
-    public int getAge() {
-        return age;
-    }
 
-    public void setAge(int age) {
-        this.age = age;
+
+        /* Запрос добовляющий новую должность в базу данных. */
+       // query = "INSERT INTO companyDB.Position (title, salary)" + " VALUES" + " ('"+ name + "'" + ", " + "'" + salary +"')";
+//        connect.connectToDatabase(query);
+
+
     }
 }
